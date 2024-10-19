@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="menu-icon" id="menu-btn">
+                <span class="hamburger">&#9776;</span>
+            </div>
+            <div class="sidebar-content">
+                <div class="greeting">
+                    <p>hola, <strong>Vanessa</strong></p>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="dashboard.html">perfumes</a></li>
+                    <li><a href="#">distribuidores</a></li>
+                    <li><a href="#">ventas</a></li>
+                </ul>
+                <div class="logout">
+                    <a href="#">LOG OUT</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <h1>Perfume Dashboard</h1>
+            <button id="add-perfume-btn">Add New Perfume</button>
+            
+            <table class="perfume-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Distribuidor</th>
+                        <th>ml</th>
+                        <th>Stock</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows with perfume data will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
