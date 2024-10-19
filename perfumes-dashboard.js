@@ -8,20 +8,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     addPerfumeBtn.addEventListener('click', function () {
-        // Logic to add a new perfume
-        alert('Add new perfume functionality goes here!');
+        // Open a modal or prompt for adding a new perfume
+        const name = prompt("Enter perfume name:");
+        const price = parseFloat(prompt("Enter perfume price:"));
+        const distributor = prompt("Enter distributor:");
+        const ml = parseInt(prompt("Enter size in ml:"));
+        const stock = parseInt(prompt("Enter stock quantity:"));
+
+        if (name && !isNaN(price) && distributor && !isNaN(ml) && !isNaN(stock)) {
+            const newPerfume = { name, price, distributor, ml, stock };
+            addPerfume(newPerfume); // Call the function to add perfume
+        } else {
+            alert("Please provide valid input!");
+        }
     });
 
-    // Example function to add rows dynamically (this could be connected to backend data)
-    function addPerfumeRow(nombre, precio, distribuidor, ml, stock) {
+    function addPerfumeRow(perfume) {
         const tableBody = document.querySelector('.perfume-table tbody');
         const row = document.createElement('tr');
+        row.dataset.id = perfume.id; // Store the ID for reference
         row.innerHTML = `
-            <td>${nombre}</td>
-            <td>${precio}</td>
-            <td>${distribuidor}</td>
-            <td>${ml}</td>
-            <td>${stock}</td>
+            <td>${perfume.name}</td>
+            <td>$${perfume.price.toFixed(2)}</td>
+            <td>${perfume.distributor}</td>
+            <td>${perfume.ml}ml</td>
+            <td>${perfume.stock}</td>
             <td>
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
@@ -30,22 +41,89 @@ document.addEventListener('DOMContentLoaded', function () {
         tableBody.appendChild(row);
 
         // Add event listeners for edit and delete buttons
-        row.querySelector('.edit-btn').addEventListener('click', () => editPerfume(row));
-        row.querySelector('.delete-btn').addEventListener('click', () => deletePerfume(row));
+        row.querySelector('.edit-btn').addEventListener('click', () => editPerfume(perfume.id, row));
+        row.querySelector('.delete-btn').addEventListener('click', () => deletePerfume(perfume.id, row));
     }
 
-    function editPerfume(row) {
-        // Logic for editing the perfume
-        alert('Edit perfume functionality goes here!');
+    function fetchPerfumes() {
+        axios.get('http://127.0.0.1:3000/perfumes')
+            .then(response => {
+                console.log('Fetched perfumes:', response.data);
+                response.data.forEach(perfume => {
+                    addPerfumeRow(perfume);
+                });
+            })
+            .catch(error => {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    console.error('Error fetching perfumes:', error.response.data);
+                    alert(`Failed to fetch perfumes: ${error.response.status} ${error.response.statusText}`);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.error('No response received:', error.request);
+                    alert('No response from server. Check if the backend is running.');
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.error('Error setting up request:', error.message);
+                    alert(`Error: ${error.message}`);
+                }
+            });
+    }
+    
+
+    function addPerfume(perfume) {
+        axios.post('http://127.0.0.1:3000/perfumes', perfume)
+            .then(response => {
+                console.log('Perfume added:', response.data); // Log the added perfume data
+                addPerfumeRow(response.data); // Add the new row to the table
+            })
+            .catch(error => console.error('Error adding perfume:', error));
     }
 
-    function deletePerfume(row) {
-        // Logic for deleting the perfume
-        row.remove();
-        alert('Perfume deleted!');
+    function editPerfume(id, row) {
+        // Prompt for new values and show current values as defaults
+        const name = prompt("Edit perfume name:", row.cells[0].innerText);
+        const price = parseFloat(prompt("Edit perfume price:", row.cells[1].innerText.replace('$', '')));
+        const distributor = prompt("Edit distributor:", row.cells[2].innerText);
+        const ml = parseInt(prompt("Edit size in ml:", row.cells[3].innerText.replace('ml', '')));
+        const stock = parseInt(prompt("Edit stock quantity:", row.cells[4].innerText));
+
+        if (name && !isNaN(price) && distributor && !isNaN(ml) && !isNaN(stock)) {
+            const updatedPerfume = { name, price, distributor, ml, stock };
+            updatePerfume(id, updatedPerfume, row); // Call the function to update perfume
+        } else {
+            alert("Please provide valid input!");
+        }
     }
 
-    // Example data (this should come from your backend)
-    addPerfumeRow('Perfume A', '$50', 'Distribuidor 1', '50ml', 20);
-    addPerfumeRow('Perfume B', '$70', 'Distribuidor 2', '100ml', 10);
+    function updatePerfume(id, updatedPerfume, row) {
+        // Make an API call to update the perfume
+        axios.put(`http://127.0.0.1:3000/perfumes/${id}`, updatedPerfume)
+            .then(response => {
+                console.log('Perfume updated:', response.data);
+                // Update the table row with new values
+                row.cells[0].innerText = updatedPerfume.name;
+                row.cells[1].innerText = `$${updatedPerfume.price.toFixed(2)}`;
+                row.cells[2].innerText = updatedPerfume.distributor;
+                row.cells[3].innerText = `${updatedPerfume.ml}ml`;
+                row.cells[4].innerText = updatedPerfume.stock;
+            })
+            .catch(error => console.error('Error updating perfume:', error));
+    }
+
+
+    function deletePerfume(id, row) {
+        if (confirm("Are you sure you want to delete this perfume?")) {
+            axios.delete(`http://127.0.0.1:3000/perfumes/${id}`)
+                .then(response => {
+                    console.log('Perfume deleted:', response.data);
+                    row.remove(); // Remove the row from the table
+                })
+                .catch(error => console.error('Error deleting perfume:', error));
+        }
+    }
+
+    fetchPerfumes();
+
+    
 });
