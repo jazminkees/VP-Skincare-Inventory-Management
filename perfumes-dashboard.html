@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfume Dashboard</title>
+    <title>Perfumes</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="perfumes-dashboard.js"></script>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body class="dashboard">
-
+    <div class="loading-overlay"></div>
     <div class="container">
         <nav id="sidebar" class="sidebar">
             <div class="menu-icon" id="menu-btn">
@@ -20,6 +21,7 @@
                     <p>hola, <strong>Vanessa</strong></p>
                 </div>
                 <ul class="nav-list">
+                    <li><a href="homepage.html">homepage</a></li>
                     <li><a href="perfumes-dashboard.html">perfumes</a></li>
                     <li><a href="distribuidores-dashboard.html">distribuidores</a></li>
                     <li><a href="#">ventas</a></li>
@@ -52,6 +54,15 @@
             </table>
         </div>
     </div>
-
+    <script>
+        
+        window.onload = function() {
+            const overlay = document.querySelector('.loading-overlay');
+            overlay.classList.add('fade-out');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 1000); 
+        };
+    </script>
 </body>
 </html>
