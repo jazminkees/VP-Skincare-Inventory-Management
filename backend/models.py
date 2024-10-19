@@ -11,3 +11,4 @@ class Perfume(Base):
     distributor = Column(String(255))
     ml = Column(Integer)
     stock = Column(Integer)
+

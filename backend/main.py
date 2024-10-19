@@ -48,3 +48,4 @@ def delete_perfume(perfume_id: int, db: Session = Depends(database.get_db)):
     db.delete(db_perfume)
     db.commit()
     return {"message": "Perfume deleted"}
+

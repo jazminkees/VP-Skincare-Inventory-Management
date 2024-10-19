@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.getElementById('menu-btn');
     const sidebar = document.getElementById('sidebar');
-    const addPerfumeBtn = document.getElementById('add-perfume-btn');
 
     menuBtn.addEventListener('click', function () {
         sidebar.classList.toggle('collapsed');
     });
+
+    const addPerfumeBtn = document.getElementById('add-perfume-btn');
+
 
     addPerfumeBtn.addEventListener('click', function () {
         // Open a modal or prompt for adding a new perfume

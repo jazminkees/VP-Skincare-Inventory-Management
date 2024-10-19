@@ -1,5 +1,4 @@
-
-body{
+body {
     margin: 0;
     padding: 0;
     display: flex;
@@ -7,6 +6,20 @@ body{
     align-items: center;
     height: 100vh;
     background: linear-gradient(135deg, #f1f3ed, #cfb9aa);
+    background-size: 200% 200%;
+    animation: gradientAnimation 5s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .login-container{
@@ -27,7 +40,7 @@ body{
     padding: 20px;
 }
 
-.login-container input[type="email"],
+.login-container input[type="username"],
 .login-container input[type="password"] {
     width: 100%;
     padding: 10px;

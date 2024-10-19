@@ -16,3 +16,4 @@ class Perfume(PerfumeBase):
 
     class Config:
         orm_mode = True
+

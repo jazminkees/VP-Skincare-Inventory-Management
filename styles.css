@@ -6,6 +6,17 @@ body {
     background-color: white;
 }
 
+.homepage {
+    background-image: url('images/homepage-mockup.png');
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh; 
+}
+
+.dashboard {
+    background-color: #f0f0f0; 
+    height: 100vh;
+}
 
 .container {
     display: flex;
