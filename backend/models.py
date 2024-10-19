@@ -6,6 +6,7 @@ class Perfume(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), index=True)
+    brand = Column(String(255))
     price = Column(Float)
     distributor = Column(String(255))
     ml = Column(Integer)

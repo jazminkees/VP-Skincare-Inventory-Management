@@ -11,12 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Open a modal or prompt for adding a new perfume
         const name = prompt("Enter perfume name:");
         const price = parseFloat(prompt("Enter perfume price:"));
+        const brand = prompt("Enter perfume brand:");
         const distributor = prompt("Enter distributor:");
         const ml = parseInt(prompt("Enter size in ml:"));
         const stock = parseInt(prompt("Enter stock quantity:"));
 
         if (name && !isNaN(price) && distributor && !isNaN(ml) && !isNaN(stock)) {
-            const newPerfume = { name, price, distributor, ml, stock };
+            const newPerfume = { name, price, brand, distributor, ml, stock };
             addPerfume(newPerfume); // Call the function to add perfume
         } else {
             alert("Please provide valid input!");
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         row.innerHTML = `
             <td>${perfume.name}</td>
             <td>$${perfume.price.toFixed(2)}</td>
+            <td>${perfume.brand}</td>
             <td>${perfume.distributor}</td>
             <td>${perfume.ml}ml</td>
             <td>${perfume.stock}</td>
@@ -84,12 +86,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Prompt for new values and show current values as defaults
         const name = prompt("Edit perfume name:", row.cells[0].innerText);
         const price = parseFloat(prompt("Edit perfume price:", row.cells[1].innerText.replace('$', '')));
-        const distributor = prompt("Edit distributor:", row.cells[2].innerText);
-        const ml = parseInt(prompt("Edit size in ml:", row.cells[3].innerText.replace('ml', '')));
-        const stock = parseInt(prompt("Edit stock quantity:", row.cells[4].innerText));
+        const brand = prompt("Edit brand name:", row.cells[2].innerText);
+        const distributor = prompt("Edit distributor:", row.cells[3].innerText);
+        const ml = parseInt(prompt("Edit size in ml:", row.cells[4].innerText.replace('ml', '')));
+        const stock = parseInt(prompt("Edit stock quantity:", row.cells[5].innerText));
 
-        if (name && !isNaN(price) && distributor && !isNaN(ml) && !isNaN(stock)) {
-            const updatedPerfume = { name, price, distributor, ml, stock };
+        if (name && !isNaN(price) && brand && distributor && !isNaN(ml) && !isNaN(stock)) {
+            const updatedPerfume = { name, price, brand, distributor, ml, stock };
             updatePerfume(id, updatedPerfume, row); // Call the function to update perfume
         } else {
             alert("Please provide valid input!");
@@ -104,9 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Update the table row with new values
                 row.cells[0].innerText = updatedPerfume.name;
                 row.cells[1].innerText = `$${updatedPerfume.price.toFixed(2)}`;
-                row.cells[2].innerText = updatedPerfume.distributor;
-                row.cells[3].innerText = `${updatedPerfume.ml}ml`;
-                row.cells[4].innerText = updatedPerfume.stock;
+                row.cells[2].innerText = updatedPerfume.brand;
+                row.cells[3].innerText = updatedPerfume.distributor;
+                row.cells[4].innerText = `${updatedPerfume.ml}ml`;
+                row.cells[5].innerText = updatedPerfume.stock;
             })
             .catch(error => console.error('Error updating perfume:', error));
     }
