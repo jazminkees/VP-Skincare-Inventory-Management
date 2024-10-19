@@ -1,4 +1,4 @@
-html{
+html {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -88,8 +88,6 @@ body {
 .logout {
     margin-top: auto;
     text-align: left;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
 }
 
 .logout a {
@@ -103,18 +101,38 @@ body {
     padding: 20px;
 }
 
-.perfume-table {
+.perfume-table,
+.distributor-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.perfume-table th, .perfume-table td {
+.perfume-table th,
+.distributor-table th,
+.perfume-table td,
+.distributor-table td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
 }
 
-.perfume-table th {
+.perfume-table th,
+.distributor-table th {
     background-color: #f5f5f5;
+}
+
+.button {
+    background-color: #382d30;  /* Primary color */
+    color: white;                /* Text color */
+    border: none;                /* No border */
+    padding: 10px 15px;         /* Padding around the text */
+    cursor: pointer;             /* Cursor changes to pointer on hover */
+    border-radius: 5px;         /* Rounded corners */
+    font-size: 16px;             /* Font size */
+    transition: background-color 0.3s ease; /* Smooth background color change */
+}
+
+.button:hover {
+    background-color: #bd907f;   /* Darker shade for hover effect */
 }

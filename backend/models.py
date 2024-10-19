@@ -12,3 +12,13 @@ class Perfume(Base):
     ml = Column(Integer)
     stock = Column(Integer)
 
+
+class Distribuidor(Base):
+    __tablename__ = "distribuidores"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), index=True)
+    phone = Column(String(50), nullable=True)
+    email = Column(String(255), nullable=True)
+    address = Column(String(255))
+    

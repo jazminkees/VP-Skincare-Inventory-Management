@@ -17,3 +17,18 @@ class Perfume(PerfumeBase):
     class Config:
         orm_mode = True
 
+
+class DistribuidorBase(BaseModel):
+    name: str
+    phone: int
+    email: str
+    address: str
+
+class DistribuidorCreate(DistribuidorBase):
+    pass
+
+class Distribuidor(DistribuidorBase):
+    id: int
+
+    class Config:
+        orm_mode = True
