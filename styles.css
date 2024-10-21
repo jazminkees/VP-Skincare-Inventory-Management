@@ -101,17 +101,6 @@ body {
     color: #000;
 }
 
-.logout {
-    margin-top: auto;
-    text-align: left;
-}
-
-.logout a {
-    text-decoration: none;
-    color: #7a7a7a;
-    font-size: 16px;
-}
-
 .dashboard-content {
     flex: 1;
     padding: 20px;

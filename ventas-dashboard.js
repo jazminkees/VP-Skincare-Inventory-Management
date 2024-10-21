@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
         tableBody.appendChild(row);
 
-        // Add event listeners for edit, delete, and print buttons
         row.querySelector('.edit-btn').addEventListener('click', () => editSale(sale.id, row));
         row.querySelector('.delete-btn').addEventListener('click', () => deleteSale(sale.id, row));
         row.querySelector('.print-receipt-btn').addEventListener('click', () => printReceipt(sale));
