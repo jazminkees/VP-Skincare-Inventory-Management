@@ -81,3 +81,36 @@ def delete_distribuidor(distribuidor_id: int, db: Session = Depends(database.get
     db.delete(db_distribuidor)
     db.commit()
     return {"message": "Distribuidor deleted"}
+
+@app.post("/ventas/", response_model=schemas.Venta)
+def create_sale(venta: schemas.VentaCreate, db: Session = Depends(database.get_db)):
+    db_sale = models.Venta(**venta.dict())
+    db.add(db_sale)
+    db.commit()
+    db.refresh(db_sale)
+    return db_sale
+
+@app.get("/ventas/", response_model=list[schemas.Venta])
+def read_sales(skip: int = 0, limit: int = 10, db: Session = Depends(database.get_db)):
+    sales = db.query(models.Venta).offset(skip).limit(limit).all()
+    return sales
+
+@app.put("/ventas/{venta_id}", response_model=schemas.Venta)
+def update_sale(venta_id: int, sale: schemas.VentaCreate, db: Session = Depends(database.get_db)):
+    db_sale = db.query(models.Venta).filter(models.Venta.id == venta_id).first()
+    if db_sale is None:
+        raise HTTPException(status_code=404, detail="Venta not found")
+    for key, value in sale.dict().items():
+        setattr(db_sale, key, value)
+    db.commit()
+    db.refresh(db_sale)
+    return db_sale
+
+@app.delete("/ventas/{venta_id}")
+def delete_sale(venta_id: int, db: Session = Depends(database.get_db)):
+    db_sale = db.query(models.Venta).filter(models.Venta.id == venta_id).first()
+    if db_sale is None:
+        raise HTTPException(status_code=404, detail="Sale not found")
+    db.delete(db_sale)
+    db.commit()
+    return {"message": "Sale deleted"}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body class="dashboard">
+    <div class="loading-overlay"></div>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="menu-icon" id="menu-btn">
+                <span class="hamburger">&#9776;</span>
+            </div>
+            <div class="sidebar-content">
+                <div class="greeting">
+                    <p>Hola, <strong>Vanessa</strong></p>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="homepage.html">Homepage</a></li>
+                    <li><a href="perfumes-dashboard.html">Perfumes</a></li>
+                    <li><a href="distribuidores-dashboard.html">Distribuidores</a></li>
+                    <li><a href="ventas-dashboard.html">Ventas</a></li>
+                </ul>
+                <div class="logout">
+                    <a href="#">LOG OUT</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <h1>Ventas Dashboard</h1>
+            <button id="add-sale-btn" class="button">Add New Sale</button>
+            
+            <table class="venta-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Nombre del Cliente</th>
+                        <th>Contacto del Cliente</th>
+                        <th>Productos</th>
+                        <th>Descuento</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            const overlay = document.querySelector('.loading-overlay');
+            overlay.classList.add('fade-out');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 1000); 
+        };
+    </script>
+    <script src="ventas-dashboard.js" defer></script>
+</body>
+</html>

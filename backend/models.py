@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, Date
 from database import Base
 
 class Perfume(Base):
@@ -18,7 +18,18 @@ class Distribuidor(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), index=True)
-    phone = Column(String(50), nullable=True)
-    email = Column(String(255), nullable=True)
+    phone = Column(String(50))
+    email = Column(String(255))
     address = Column(String(255))
     
+
+class Venta(Base):
+    __tablename__ = "ventas"
+
+    id = Column(Integer, primary_key=True, index=True)
+    date = Column(Date)
+    client_name = Column(String(255))
+    client_contact = Column(String(50))
+    perfume_names = Column(String(255))
+    discount = Column(Float)
+    total = Column(Float) 
